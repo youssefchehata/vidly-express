@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose')//MONGOOSE
+
 const Customer =  mongoose.model('Customer', new mongoose.Schema({ //MONGOOSE
     name:{
       type:String,
