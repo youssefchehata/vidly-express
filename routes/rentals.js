@@ -8,7 +8,7 @@ const mongoose = require('mongoose')//MONGOOSE
 const express = require('express');
 const router = express.Router();
 
-Faws.init(mongoose)
+Fawn.init(mongoose)
 
 router.get('/', async (req, res) => {
   const rentals = await Rental.find().sort('-dateOut') //in descending order   //MONGOOSE
@@ -40,42 +40,31 @@ router.post('/', async(req, res) => {
       },
 
   });
-  new Fawn.Task()
+  try {
+      new Fawn.Task()
   .save('rentals',rental)
   .update('movies',{_id:movie._id},{
       $inc:{numberInStock:-1}
   })
+  .run()  
+  res.send(rental)
+  }
+catch (ex){
+ res.status(500).send('something failed')
+}
 //   rental = await rental.save()     //MONGOOSE
 
 //   movie.numberInstock-- //decrement stock
 //   movie.save()
-  res.send(rental);
+//   res.send(rental);
 });
 
-router.put('/:id',async (req, res) => {
-  const { error } = validate(req.body); 
-  if (error) return res.status(400).send(error.details[0].message);
-  const movie = await Movie.findByIdAndUpdate(req.params.id,{name:req.body.name},{  //MONGOOSE
-    new:true
-  })
-   
-  if (!rental) return res.status(404).send('The rental with the given ID was not found.');
 
-  res.send(rental);
-});
-
-router.delete('/:id',async (req, res) => {
- const movie = await Movie.findByIdAndRemove(req.params.id)
-
-  if (!movie) return res.status(404).send('The movie with the given ID was not found.');
-
-  res.send(movie);
-});
 
 router.get('/:id',async (req, res) => {
- const movie = await Movie.findById(req.params.id)
-   if (!movie) return res.status(404).send('The movie with the given ID was not found.');
-  res.send(movie);
+ const rental = await Rental.findById(req.params.id)
+   if (!rental) return res.status(404).send('The rental with the given ID was not found.');
+  res.send(rental);
 });
 
 
