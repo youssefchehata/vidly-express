@@ -18,6 +18,9 @@ router.get('/', async (req, res) => {
 router.post('/', async(req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
+  
+  // if(!mongoose.Types.ObjectId.isValid(req.body.customerId))
+  // return res.status(400).send('Invalid customer.')
 
   const customer = await Customer.findById(req.body.customerId)  //change
   if(!customer)return res.status(400).send('Invalid customer.')
