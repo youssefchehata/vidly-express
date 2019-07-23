@@ -1,6 +1,6 @@
 const Joi = require('joi')
- Joi.objectId = require('joi-objectid')(Joi)
- 
+ Joi.objectId = require('joi-objectid')(Joi) //objectId
+
 const mongoose = require('mongoose')
 
 const genres = require('./routes/genres');
