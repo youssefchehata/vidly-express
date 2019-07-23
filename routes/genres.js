@@ -14,11 +14,11 @@ router.post('/', async(req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
-  let genre = new Genre( {
+  const genre = new Genre( {
       name: req.body.name      //MONGOOSE
   });
   
-  genre = await genre.save()     //MONGOOSE
+   await genre.save()     //MONGOOSE
   res.send(genre);
 });
 

@@ -19,7 +19,7 @@ router.post('/', async(req, res) => {
   const genre = await Genre.findById(req.body.genreId)  //change
   if(!genre)return res.status(400).send('Invalid genre.')
 
-  let movie = new Movie( {
+  const movie = new Movie( {
       title: req.body.title,      //MONGOOSE
       numberInStock:req.body.numberInStock,
       dailyRentalRate:req.body.dailyRentalRate,
@@ -30,7 +30,7 @@ router.post('/', async(req, res) => {
 
   });
   
-  movie = await movie.save()     //MONGOOSE
+   await movie.save()     //MONGOOSE
   res.send(movie);
 });
 
