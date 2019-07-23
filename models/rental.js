@@ -1,5 +1,5 @@
 const Joi = require('joi')
- Joi.objectId = require('joi-objectid')(Joi)
+//  Joi.objectId = require('joi-objectid')(Joi) //move't to index.js
 const mongoose = require('mongoose')//MONGOOSE
 
 
@@ -40,7 +40,7 @@ rentalFee:{
   function validateRental(rental) {
     const schema = {                        //client will set movieId & customerId
       customerId: Joi.objectId().required(),
-      movieId: Joi.objectId().required(),
+      movieId: Joi.objectId().required(),   //objectId
       // movieId: Joi.string().required(),
 
     };
