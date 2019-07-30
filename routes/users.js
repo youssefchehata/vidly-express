@@ -15,17 +15,14 @@ router.post('/', async (req, res) => {
   user = new User(_.pick(req.body, ['_id', 'name', 'email','password'])//MONGOOSE
     // { name: req.body.name, email: req.body.email, password: req.body.password }
   );
-
-  const salt = await bcrypt.genSalt(10)                       //hash bcrypt password
+  //salt & hash bcrypt password
+  const salt = await bcrypt.genSalt(10)                       
   user.password = await bcrypt.hash(user.password,salt)
 
   await user.save(); //MONGOOSE
 
   res.send(_.pick(user, ['_id', 'name', 'email']));
-  // res.send({
-  //   name:user.name,          //to exclude password from user
-  //   email:user.email
-  // });
+  // res.send({ name:user.name, email:user.email });//to exclude password from user
 });
 
 module.exports = router;
