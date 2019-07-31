@@ -19,3 +19,8 @@ import { type } from "os";
 // npm i lodash@4.17.4
 //npm i joi-password-complexity
 //npm i bcrypt
+
+//npm i jsonwebtoken
+//npm i config@1.29.4
+// export vidly_jwtPrivateKey=14775
+//    set vidly_jwtPrivateKey=14775 auth 
